@@ -6,19 +6,18 @@ from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
 from models.city import City
 
-storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 
 class State(BaseModel, Base):
     __tablename__ = 'states'
 
     name = Column(String(128), nullable=False)
 
-    if storage_type == 'db':
+    if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
         cities = relationship('City', cascade='all, delete-orphan', backref='state')
     else:
         name = ""
 
-    if storage_type != 'db':
+    if os.environ.get('HBNB_TYPE_STORAGE') != 'db':
         @property
         def cities(self):
             from models import storage
