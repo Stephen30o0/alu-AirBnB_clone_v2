@@ -24,27 +24,14 @@ def do_deploy(archive_path):
         return False
 
     try:
-        # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, "/tmp/")
         filename = archive_path.split("/")[-1].split(".")[0]
-
-        # Uncompress the archive to the folder /data/web_static/releases/<archive filename without extension> on the web server
         run("mkdir -p /data/web_static/releases/{}/".format(filename))
         run("tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/".format(filename, filename))
-
-        # Delete the archive from the web server
         run("rm /tmp/{}.tgz".format(filename))
-
-        # Move the contents of the web_static folder up one level
         run("mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/".format(filename, filename))
-
-        # Delete the web_static folder
         run("rm -rf /data/web_static/releases/{}/web_static".format(filename))
-
-        # Delete the symbolic link /data/web_static/current from the web server
         run("rm -rf /data/web_static/current")
-
-        # Create a new the symbolic link /data/web_static/current on the web server, linked to the new version of your code (/data/web_static/releases/<archive filename without extension>)
         run("ln -s /data/web_static/releases/{}/ /data/web_static/current".format(filename))
         return True
 
