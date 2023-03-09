@@ -12,6 +12,7 @@ fi
 sudo mkdir -p /data/web_static/{releases/test,shared}
 
 # Create fake index.html file for testing
+sudo touch /data/web_static/releases/test/index.html
 sudo echo "<html><body>Testing Nginx configuration</body></html>" > /data/web_static/releases/test/index.html
 
 # Create symbolic link to current release
@@ -21,7 +22,7 @@ sudo ln -sf /data/web_static/releases/test /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
 # Update Nginx configuration
-sudo sed -i '/server_name _;/a location /hbnb_static/ {\n\talias /data/web_static/current/;\n}\n' /etc/nginx/sites-available/default
+sudo sed -i '38i\\n\tlocation /hbnb_static/ {\n\talias /data/web_static/current/;\n}\n' /etc/nginx/sites-available/default
 
 # Restart Nginx to apply changes
 sudo service nginx restart
