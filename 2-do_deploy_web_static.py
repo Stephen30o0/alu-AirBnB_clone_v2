@@ -5,13 +5,6 @@ from datetime import datetime
 
 env.hosts = ['54.242.46.167', '54.234.143.129']
 
-#!/usr/bin/python3
-from fabric.api import *
-from datetime import datetime
-import os
-
-env.hosts = ['localhost']
-
 
 def do_pack():
     try:
