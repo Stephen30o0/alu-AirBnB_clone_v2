@@ -7,6 +7,7 @@ env.hosts = ['localhost']
 
 
 def do_pack():
+    """ Creates .tgz archive from the contents of the web_static folder"""
     try:
         if not os.path.exists("versions"):
             local("mkdir versions")
