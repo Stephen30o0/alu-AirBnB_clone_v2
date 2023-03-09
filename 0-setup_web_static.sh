@@ -13,7 +13,7 @@ sudo mkdir -p /data/web_static/{releases/test,shared}
 
 # Create fake index.html file for testing
 sudo touch /data/web_static/releases/test/index.html
-sudo echo "<html><body>Testing Nginx configuration</body></html>" > /data/web_static/releases/test/index.html
+echo "<html><body>Testing Nginx configuration</body></html>" | sudo tee /data/web_static/releases/test/index.html
 
 # Create symbolic link to current release
 sudo ln -sf /data/web_static/releases/test /data/web_static/current
