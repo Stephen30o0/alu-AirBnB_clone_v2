@@ -7,7 +7,6 @@ env.hosts = ['localhost']
 
 
 def do_pack():
-    """Creates a compressed archive of the web_static folder"""
     try:
         if not os.path.exists("versions"):
             local("mkdir versions")
