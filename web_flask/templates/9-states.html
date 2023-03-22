@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cities by States</title>
+  </head>
+  <body>
+    <h1>States</h1>
+    <ul>
+      {% for state in states %}
+      <li>{{ state.id }}: <b>{{ state.name }}</b>
+        <ul>
+          {% for city in state.cities %}
+          <li>{{ city.id }}: <b>{{ city.name }}</b></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    <h1>States</h1>
+    <ul>
+      {% for state in states %}
+        <li>{{ state.id }}: <b>{{ state.name }}</b></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <H1>Not found!</H1>
+    {% endif %}
+  </body>
+</html>
