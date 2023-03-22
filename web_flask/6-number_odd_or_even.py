@@ -1,0 +1,52 @@
+#!/usr/bin/python3
+"""Flask app with six routes."""
+
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET'], strict_slashes=False)
+def hello():
+    return 'Hello HBNB!'
+
+
+@app.route('/hbnb', methods=['GET'], strict_slashes=False)
+def hbnb():
+    return 'HBNB'
+
+
+@app.route('/c/<text>', methods=['GET'], strict_slashes=False)
+def c(text):
+    return 'C {}'.format(text.replace('_', ' '))
+
+
+@app.route('/python/', defaults={'text': 'is cool'})
+@app.route('/python/<text>', methods=['GET'], strict_slashes=False)
+def python(text):
+    return 'Python {}'.format(text.replace('_', ' '))
+
+
+@app.route('/number/<int:n>', methods=['GET'], strict_slashes=False)
+def number(n):
+    return '{} is a number'.format(n)
+
+
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def number_template(n):
+    if isinstance(n, int):
+        return render_template('5-number_template.html', n=n)
+    
+
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def number_odd_or_even(n):
+    if n % 2 == 0:
+        odd_or_even = 'even'
+    else:
+        odd_or_even = 'odd'
+    return render_template('number_odd_or_even.html', n=n, odd_or_even=odd_or_even)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
